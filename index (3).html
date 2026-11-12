@@ -1,133 +1,208 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Open Studio Summer Program – Application</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=IBM+Plex+Sans:wght@400;500&display=swap">
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-<main class="wrap">
+:root {
+  --paper: #e9eff4;
+  --ink: #12293d;
+  --ink-soft: #1c3b55;
+  --muted: #4d6275;
+  --line: #b7c5d3;
+  --tint: #e3f2f1;
+  --teal: #0b6e6e;
+  --teal-dark: #085757;
+  --saffron: #f0b429;
+  --error: #b42318;
+  --shadow: 0 1px 2px rgba(18, 41, 61, .06), 0 12px 32px -8px rgba(18, 41, 61, .22);
+  --display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --body: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
 
-  <header class="masthead">
-    <h1>Open Studio Summer Program</h1>
-    <p>Applications for the 2027 cohort are open. Complete the form and you’ll get a printable confirmation right away.</p>
-  </header>
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
 
-  <!-- ===== Form ===== -->
-  <section id="formView" aria-label="Application form">
-    <form id="regForm" class="card" novalidate>
+body {
+  position: relative;
+  margin: 0;
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 1rem/1.55 var(--body);
+}
 
-      <fieldset>
-        <legend>About you</legend>
-        <div class="grid">
-          <div class="field span2">
-            <label for="fullName">Full name</label>
-            <input id="fullName" name="fullName" type="text" autocomplete="name" required>
-            <small class="err" data-for="fullName"></small>
-          </div>
-          <div class="field">
-            <label for="email">Email address</label>
-            <input id="email" name="email" type="email" autocomplete="email" required>
-            <small class="err" data-for="email"></small>
-          </div>
-          <div class="field">
-            <label for="phone">Phone number</label>
-            <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+91 98765 43210" required>
-            <small class="err" data-for="phone"></small>
-          </div>
-          <div class="field">
-            <label for="dob">Date of birth</label>
-            <input id="dob" name="dob" type="date" autocomplete="bday" required>
-            <small class="hint">You must be 16 or older.</small>
-            <small class="err" data-for="dob"></small>
-          </div>
-          <div class="field">
-            <label for="city">City</label>
-            <input id="city" name="city" type="text" autocomplete="address-level2" required>
-            <small class="err" data-for="city"></small>
-          </div>
-          <div class="field span2" role="group" aria-labelledby="genderLabel">
-            <span class="label" id="genderLabel">Gender</span>
-            <div class="choices">
-              <label><input type="radio" name="gender" value="Female"> Female</label>
-              <label><input type="radio" name="gender" value="Male"> Male</label>
-              <label><input type="radio" name="gender" value="Non-binary"> Non-binary</label>
-              <label><input type="radio" name="gender" value="Prefer not to say"> Prefer not to say</label>
-            </div>
-            <small class="err" data-for="gender"></small>
-          </div>
-        </div>
-      </fieldset>
+/* Dark header band behind the title; the form card overlaps its lower edge */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 18rem;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 85% 0%, rgba(11, 110, 110, .55), transparent 45%),
+    linear-gradient(160deg, var(--ink-soft), var(--ink));
+  border-bottom: 5px solid var(--saffron);
+}
 
-      <fieldset>
-        <legend>Your application</legend>
-        <div class="grid">
-          <div class="field">
-            <label for="education">Highest education</label>
-            <select id="education" name="education" required>
-              <option value="">Choose one</option>
-              <option>High school</option>
-              <option>Diploma</option>
-              <option>Bachelor’s degree</option>
-              <option>Master’s degree</option>
-              <option>Other</option>
-            </select>
-            <small class="err" data-for="education"></small>
-          </div>
-          <div class="field">
-            <label for="track">Program track</label>
-            <select id="track" name="track" required>
-              <option value="">Choose one</option>
-              <option>Web Development</option>
-              <option>Data Analysis</option>
-              <option>UI/UX Design</option>
-              <option>Digital Marketing</option>
-            </select>
-            <small class="err" data-for="track"></small>
-          </div>
-          <div class="field span2" role="group" aria-labelledby="intLabel">
-            <span class="label" id="intLabel">I’m also interested in <span class="hint">(optional)</span></span>
-            <div class="choices">
-              <label><input type="checkbox" name="interests[]" value="Mentorship"> Mentorship</label>
-              <label><input type="checkbox" name="interests[]" value="Hackathons"> Hackathons</label>
-              <label><input type="checkbox" name="interests[]" value="Internship placement"> Internship placement</label>
-              <label><input type="checkbox" name="interests[]" value="Scholarship"> Scholarship</label>
-            </div>
-          </div>
-          <div class="field span2">
-            <label for="statement">Why do you want to join?</label>
-            <textarea id="statement" name="statement" rows="5" maxlength="500" required></textarea>
-            <small class="hint"><span id="count">0</span> / 500 characters (minimum 20)</small>
-            <small class="err" data-for="statement"></small>
-          </div>
-        </div>
-      </fieldset>
+.wrap { max-width: 46rem; margin: 0 auto; padding: 3rem 1rem 4rem; }
 
-      <div class="field">
-        <label class="check"><input type="checkbox" id="terms" name="terms"> I confirm the details above are correct and agree to the program terms.</label>
-        <small class="err" data-for="terms"></small>
-      </div>
+.masthead h1 {
+  margin: 0 0 .7rem;
+  font: 700 clamp(2rem, 5vw, 3rem)/1.08 var(--display);
+  letter-spacing: -.015em;
+  color: #fff;
+}
+.masthead p { margin: 0 0 2.25rem; max-width: 56ch; color: #c9d7e3; font-size: 1.05rem; }
 
-      <button type="submit" class="btn">Submit application</button>
-    </form>
-  </section>
+/* ---------- Form ---------- */
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+fieldset { margin: 0 0 1.75rem; padding: 0; border: 0; }
+fieldset + fieldset { padding-top: 1.75rem; border-top: 1px solid #dbe4ec; }
+legend {
+  display: flex; align-items: center; gap: .6rem;
+  padding: 0; margin-bottom: 1.1rem;
+  font: 600 1.3rem var(--display);
+}
+legend::before {
+  content: "";
+  width: .4rem; height: 1.3rem;
+  border-radius: 2px;
+  background: var(--saffron);
+}
 
-  <!-- ===== Confirmation (filled by JavaScript) ===== -->
-  <section id="receiptView" aria-label="Application confirmation" hidden>
-    <div id="receipt" aria-live="polite"></div>
-    <div class="actions">
-      <button type="button" class="btn" id="printBtn">Print confirmation</button>
-      <button type="button" class="btn ghost" id="newBtn">Start a new application</button>
-    </div>
-  </section>
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.15rem 1.25rem; }
+.span2 { grid-column: 1 / -1; }
 
-</main>
+.field label, .field .label { display: block; margin-bottom: .35rem; font-weight: 500; font-size: .95rem; }
+input[type=text], input[type=email], input[type=tel], input[type=date], select, textarea {
+  width: 100%;
+  padding: .65rem .8rem;
+  font: inherit;
+  color: var(--ink);
+  background: #f6f9fb;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  transition: border-color .15s, background-color .15s, box-shadow .15s;
+}
+input::placeholder, textarea::placeholder { color: #8a9bab; }
+input:hover, select:hover, textarea:hover { border-color: #8da3b6; }
+textarea { resize: vertical; }
+input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: none;
+  background: #fff;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(11, 110, 110, .25);
+}
+.btn:focus-visible, input[type=radio]:focus-visible, input[type=checkbox]:focus-visible {
+  outline: 3px solid var(--saffron);
+  outline-offset: 2px;
+}
+[aria-invalid=true] { border-color: var(--error) !important; background: #fff6f5 !important; }
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="js/app.js"></script>
-</body>
-</html>
+/* Radios and checkboxes as selectable chips */
+.choices { display: flex; flex-wrap: wrap; gap: .6rem; }
+.choices label {
+  display: inline-flex; align-items: center; gap: .5rem;
+  margin: 0; padding: .45rem .95rem;
+  font-weight: 400;
+  background: #f6f9fb;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color .15s, border-color .15s;
+}
+.choices label:hover { border-color: var(--teal); }
+.choices label:has(input:checked) {
+  background: var(--tint);
+  border-color: var(--teal);
+  color: var(--teal-dark);
+  font-weight: 500;
+}
+label.check { display: flex; align-items: flex-start; gap: .6rem; margin: 0; font-weight: 400; }
+input[type=radio], input[type=checkbox] { accent-color: var(--teal); width: 1.05rem; height: 1.05rem; margin: .2rem 0 0; }
+.choices input { margin-top: 0; }
+
+.hint { display: block; margin-top: .3rem; font-size: .85rem; font-weight: 400; color: var(--muted); }
+.err { display: block; margin-top: .3rem; font-size: .875rem; color: var(--error); }
+.err:empty { display: none; }
+
+.btn {
+  margin-top: 1.5rem;
+  padding: .8rem 1.75rem;
+  font: 500 1rem var(--body);
+  color: #fff;
+  background: var(--teal);
+  border: 2px solid var(--teal);
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px -4px rgba(11, 110, 110, .6);
+  transition: background-color .15s, border-color .15s, transform .1s;
+}
+.btn:hover { background: var(--teal-dark); border-color: var(--teal-dark); }
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: .6; cursor: progress; }
+.btn.ghost { color: var(--teal); background: #fff; box-shadow: none; }
+.btn.ghost:hover { color: #fff; background: var(--teal); }
+
+/* ---------- Confirmation ticket ---------- */
+.ticket {
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  animation: rise .35s ease-out;
+}
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } }
+
+.ticket-head { padding: 1.6rem 1.5rem; color: #fff; background: linear-gradient(160deg, var(--ink-soft), var(--ink)); }
+.ticket-head h2 { margin: 0 0 .4rem; font: 700 1.8rem/1.1 var(--display); outline: none; }
+.ticket-head p { margin: 0; color: #d5e0ea; }
+
+.ref {
+  position: relative;
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  padding: 1.1rem 1.5rem;
+  background: var(--saffron);
+}
+.ref::before, .ref::after {
+  content: ""; position: absolute; top: 50%;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--paper); transform: translateY(-50%);
+}
+.ref::before { left: -11px; }
+.ref::after { right: -11px; }
+.ref span { font-weight: 500; }
+.ref strong { font: 700 1.6rem var(--display); letter-spacing: .04em; }
+
+.details { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.5rem; margin: 0; padding: 1.5rem; }
+.row dt { font-size: .85rem; color: var(--muted); }
+.row dd { margin: 0; font-weight: 500; overflow-wrap: anywhere; }
+.row.wide { grid-column: 1 / -1; }
+.row.wide dd { font-weight: 400; white-space: pre-wrap; }
+
+.stamp { margin: 0; padding: .9rem 1.5rem; font-size: .875rem; color: var(--muted); background: #f6f9fb; border-top: 1px solid #dbe4ec; }
+.note { margin: .75rem 0 0; font-size: .85rem; color: var(--muted); }
+.actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+
+@media (max-width: 640px) {
+  .grid, .details { grid-template-columns: 1fr; }
+  .card { padding: 1.25rem; }
+  body::before { height: 20rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticket { animation: none; }
+  .btn, input, select, textarea, .choices label { transition: none; }
+}
+
+/* ---------- Print: only the ticket ---------- */
+@media print {
+  body { background: #fff; }
+  body::before { display: none; }
+  .masthead, #formView, .actions, .no-print { display: none !important; }
+  .wrap { max-width: none; padding: 0; }
+  .ticket { border: 1px solid #000; box-shadow: none; animation: none; break-inside: avoid; }
+  .ticket-head, .ref { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .ref::before, .ref::after { background: #fff; }
+}
